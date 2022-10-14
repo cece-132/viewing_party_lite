@@ -84,23 +84,8 @@ RSpec.describe 'Discover Movies Page' do
     it 'should be able to navigate to the discover page' do
       VCR.use_cassette('user_movies_show_page') do
         user = create(:user)
-
         visit user_discover_path(user)
-
-        click_button "Top Rated Movies"
-
-        click_link "The Godfather"
-
-        expect(current_path).to eq user_movie_path(user, 238)
-      end
-    end
-
-    it 'should be able to navigate to the discover page' do
-      VCR.use_cassette('user_movies_show_page') do
-        user = create(:user)
-
-        visit user_discover_path(user)
-
+        
         click_button "Top Rated Movies"
 
         click_link "The Godfather"
