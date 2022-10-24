@@ -38,7 +38,7 @@ RSpec.describe 'The register new user page' do
       fill_in 'Name:', with: 'Kat'  
 
       fill_in 'Password:', with: 'test'
-      fill_in 'Confirmation:', with: 'test'
+      fill_in 'Password Confirmation:', with: 'test'
 
       click_button 'Create User'
 
@@ -51,12 +51,12 @@ RSpec.describe 'The register new user page' do
       fill_in 'Name:', with: 'Kat'  
 
       fill_in 'Password:', with: 'test'
-      fill_in 'Confirmation:', with: 'pizzabegood'
+      fill_in 'Password Confirmation:', with: 'pizzabegood'
 
       click_button 'Create User'
-      
+   
       expect(current_path).to eq(register_path)
-      expect(page).to have_content("The passwords must match.")
+      expect(page).to have_content("Password confirmation doesn't match Password")
     end
   end
 end
