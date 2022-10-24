@@ -8,7 +8,7 @@ RSpec.describe 'Movie Details Page' do
     before(:each) do
       VCR.use_cassette('fight_club_movie_data_v1') do
         @alex = User.create!(user_name: 'Alex', email: Faker::Internet.email,
-                              password_digest: Faker::Internet.password)
+                              password: Faker::Internet.password)
     
         @fight_club = double(id: 550, title: 'Fight Club')
         visit user_movie_path(@alex, @fight_club.id)
@@ -27,7 +27,7 @@ RSpec.describe 'Movie Details Page' do
     end
 
     it 'I see the vote Average of the movie' do
-      expect(page).to have_content("Vote Average: 8.433")
+      expect(page).to have_content("Vote Average: 8.427")
     end
 
     it 'I see the runtime in hours & minutes of the movie' do
