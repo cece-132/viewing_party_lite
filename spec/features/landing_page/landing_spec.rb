@@ -22,7 +22,6 @@ RSpec.describe "Landing Page" do
       it 'home button should navigate to landing page' do
         visit root_path
 
-        # save_and_open_page
         click_link 'Home'
         expect(current_path).to eq root_path
       end
@@ -72,6 +71,16 @@ RSpec.describe "Landing Page" do
         end
 
         expect(current_path).to eq user_path(user)
+      end
+    end
+
+    describe 'the login link' do
+      it 'can click the link to user login' do
+      
+        visit root_path
+
+        click_link 'Log In'
+        expect(current_path).to eq login_path
       end
     end
   end
