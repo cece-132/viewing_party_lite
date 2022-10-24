@@ -20,22 +20,43 @@ RSpec.describe 'The register new user page' do
     end
 
     it 'when I click the register button I am redirected to the dashboard page' do
-      fill_in 'Name:', with: 'Kat'
       fill_in 'Email:', with: 'kit.kat@guhmail.com'
-      click_button 'Create User'
+      fill_in 'Name:', with: 'Kat'  
 
+      fill_in 'Password:', with: 'test'
+      fill_in 'Confirmation:', with: 'test'
+
+      click_button 'Create User'
+      
       expect(current_path).to eq(user_path(User.find_by(user_name: 'Kat')))
     end
 
     it 'when I click the register button I am redirected register page if that email has been taken' do
-      @kat = User.create!(user_name: 'Kat', email: 'kit.kat@guhmail.com')
+      @kat = User.create!(user_name: 'Kat', email: 'kit.kat@guhmail.com', password: 'test')
 
-      fill_in 'Name:', with: 'Kit'
       fill_in 'Email:', with: 'kit.kat@guhmail.com'
+      fill_in 'Name:', with: 'Kat'  
+
+      fill_in 'Password:', with: 'test'
+      fill_in 'Confirmation:', with: 'test'
+
       click_button 'Create User'
 
       expect(current_path).to eq(register_path)
       expect(page).to have_content('Email has already been taken')
+    end
+
+    it 'when I click the register but I enter the wrong confirmation password, I can not submit' do
+      fill_in 'Email:', with: 'kit.kat@guhmail.com'
+      fill_in 'Name:', with: 'Kat'  
+
+      fill_in 'Password:', with: 'test'
+      fill_in 'Confirmation:', with: 'pizzabegood'
+
+      click_button 'Create User'
+      
+      expect(current_path).to eq(register_path)
+      expect(page).to have_content("The passwords must match.")
     end
   end
 end

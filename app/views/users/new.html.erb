@@ -3,8 +3,12 @@
 <%= form_with model: @user, local: true do |form| %>
   <p><%= form.label :user_name, "Name:"%></p>
     <%= form.text_field :user_name%>
-   <p><%= form.label :email, "Email:"%></p>
+  <p><%= form.label :email, "Email:"%></p>
     <%= form.text_field :email%>
+  <p><%= form.label :password, 'Password:' %>
+    <%= form.password_field :password %>
+  <p><%= form.label :password_confirmation, 'Confirmation:' %>
+    <%= form.password_field :password_confirmation %>  
 
-    <p><%= form.submit "Create User" %></p>
+  <p><%= form.submit "Create User" %></p>
 <% end %>
