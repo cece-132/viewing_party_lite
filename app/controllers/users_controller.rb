@@ -11,19 +11,37 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    @user.password = params[:user][:password]
     if @user.save
       redirect_to user_path(@user)
+      flash[:success] = "Welcome, #{@user.user_name}!"
     else
       redirect_to register_path(@user)
-      flash[:alert] = @user.errors.full_messages.to_sentence
+      flash[:alert] = [ @user.errors.full_messages_for(:user_name), 
+                        @user.errors.full_messages_for(:email),
+                        @user.errors.full_messages_for(:password) ].join(", ").tr(",", "")
+    end
+  end
+
+  def login_form
+  end
+
+  def login_user
+    user = User.find_by(email: params[:email])
+    if user.authenticate(params[:password])
+      session[:user_id] = user.id
+      flash[:success] = "Welcome Back #{user.user_name}! Couldn't stay away for long we see"
+      redirect_to user_path(user)
+    else
+      flash[:error] = "Uhmm...this is awkward...but you're wrong"
+      render :login_form
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:user_name, :email)
+    params.require(:user).permit(:user_name, :email, :password_digest)
   end
 end
 

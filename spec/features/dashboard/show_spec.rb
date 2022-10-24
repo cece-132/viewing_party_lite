@@ -127,7 +127,7 @@ RSpec.describe 'User Show Page' do
           end
         end
 
-        it 'within list of invited users, user name is in bold' do
+        xit 'within list of invited users, user name is in bold' do
           within '#invited_parties' do
             @viewing_party_invites.each do |party|
               within "#party_#{party.id}" do

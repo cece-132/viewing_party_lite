@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   
   match '/about', to: 'landing#about', via: :get
   match '/register', to: 'users#new', via: :get
+  match '/login', to: 'users#login_form', via: :get
+  match '/login', to: 'users#login_user', via: :post
   
   resources :users, only: %i[show create] do
     resources :movies, only: [:show] do
