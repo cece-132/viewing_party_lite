@@ -23,6 +23,7 @@ RSpec.describe 'The register new user page' do
       fill_in 'Name:', with: 'Kat'
       fill_in 'Email:', with: 'kit.kat@guhmail.com'
       fill_in 'Password:', with: 'testingtesters'
+      fill_in 'Password Confirmation:', with: 'testingtesters'
 
       click_button 'Create User'
 
