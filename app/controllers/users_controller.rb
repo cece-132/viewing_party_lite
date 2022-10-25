@@ -17,9 +17,10 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome, #{@user.user_name}!"
     else
       redirect_to register_path(@user)
-      flash[:alert] = [ @user.errors.full_messages_for(:user_name), 
-                        @user.errors.full_messages_for(:email),
-                        @user.errors.full_messages_for(:password) ].join(", ").tr(",", "")
+      flash[:alert] = @user.errors.full_messages.to_sentence # [ @user.errors.full_messages_for(:user_name), 
+      #                   @user.errors.full_messages_for(:email),
+      #                   @user.errors.full_messages_for(:password),
+      #                   @user.errors.full_messages_for(:password_confirmation) ].join(", ").tr(",", "")
     end
   end
 
@@ -41,7 +42,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:user_name, :email, :password_digest)
+    params.require(:user).permit(:user_name, :email, :password, :password_confirmation)
   end
 end
 
