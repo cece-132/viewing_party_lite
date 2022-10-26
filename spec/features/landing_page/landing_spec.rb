@@ -126,6 +126,14 @@ RSpec.describe "Landing Page" do
             expect(current_path).to eq "/"
           end
         end
+        describe 'when I try to visit /movies/550' do
+          it 'I see a message that tells me to log in' do
+            visit '/movies/550'
+
+            expect(page).to have_content("Please login")
+            expect(current_path).to eq "/"
+          end
+        end
       end
     end
   end
