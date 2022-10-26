@@ -13,7 +13,8 @@ RSpec.describe 'New Viewing Party' do
       fight_club = File.read('spec/fixtures/fight_club.json')
       movie_data = JSON.parse(fight_club, symbolize_names: true)
       @movie = Movie.new(movie_data)
-      visit new_user_movie_viewing_party_path(@user, @movie.id)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+      visit new_movie_viewing_party_path(@movie.id)
     end
   end
 
@@ -63,7 +64,7 @@ RSpec.describe 'New Viewing Party' do
           end
           click_button 'Create Viewing party'
 
-          expect(current_path).to eq(user_path(@user))
+          expect(current_path).to eq(user_path)
           new_viewing_party = ViewingParty.last
           within "#hosted_parties" do
             expect(page).to have_css("#party_#{new_viewing_party.id}")
@@ -82,7 +83,8 @@ RSpec.describe 'New Viewing Party' do
           click_button 'Create Viewing party'
           new_viewing_party = ViewingParty.last
           @friends.each do |user|
-            visit user_path(user)
+            allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+            visit user_path
             within "#invited_parties" do
               expect(page).to have_css("#party_#{new_viewing_party.id}")
               expect(page).to have_link(new_viewing_party.movie_title)

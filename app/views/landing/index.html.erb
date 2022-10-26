@@ -16,7 +16,7 @@
   <h1> Existing Users </h1>
   
   <% @users.each do |user| %>
-    <%= link_to user.email, user_path(user) %> <br>
+    <%= link_to user.email, user_path %> <br>
   <% end %>
 
 </div>

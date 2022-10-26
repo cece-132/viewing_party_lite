@@ -1,5 +1,5 @@
 <h1><%= @user.user_name %>'s Dashboard</h1>
-<%=button_to "Discover Movies", user_discover_path(@user), method: :get%>
+<%=button_to "Discover Movies", discover_path, method: :get%>
 <hr>
 <h2>My Hosted Viewing Parties</h2>
   <%= render partial: 'viewing_party_show', locals: {role: 'Hosting', party_type: 'hosted'} %>

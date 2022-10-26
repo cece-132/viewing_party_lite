@@ -11,4 +11,5 @@ class ViewingParty < ApplicationRecord
   def invited_users
     users.where.not('user_name = ?', host)
   end
+
 end

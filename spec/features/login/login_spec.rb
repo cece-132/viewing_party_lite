@@ -18,7 +18,7 @@ RSpec.describe "User Login" do
 
       click_button "Log In"
 
-      expect(current_path).to eq user_path(@user)
+      expect(current_path).to eq user_path
       expect(page).to have_content("Welcome Back #{@user.user_name}! Couldn't stay away for long we see")
     end
 

@@ -21,22 +21,22 @@ table {
 <h1> Discover Movies </h1>
 <br>
 <br>
-<%= button_to "Top Rated Movies", user_discover_path(@user, "top_rated"), method: :get %>
+<%= button_to "Top Rated Movies", discover_path( "top_rated"), method: :get %>
 <br>
 <br>
-<%= form_with url: user_discover_path(@user), method: :get do |form| %>
+<%= form_with url: discover_path, method: :get do |form| %>
   <%= form.text_field :query %>
   <%= form.submit "Find Movies" %>
 <% end %>
 
 <% if !@top_movies.empty? %>
   <div id="top_40_movies">
-  <h3> <%= button_to "Discover Page", user_discover_path(@user), method: :get %> </h3>
+  <h3> <%= button_to "Discover Page", discover_path, method: :get %> </h3>
   <h2>Top 40 Movies</h2>
     <table>
         <% @top_movies.each do |movie| %>
       <tr>
-          <td><%= link_to movie.title, user_movie_path(@user, movie.id) %></td>
+          <td><%= link_to movie.title, movie_path( movie.id) %></td>
           <td><%= number_with_precision(movie.vote_average, precision: 1) %> / 10</td>
       </tr>
         <% end %>
@@ -48,12 +48,12 @@ table {
       <% if @movies.include?("No Movies Found, Please Try Again") %>
         <h2> <%= "No Movies Found, Please Try Again" %> </h2>
       <% else %>
-        <h3> <%= button_to "Discover Page", user_discover_path(@user), method: :get %> </h3>
+        <h3> <%= button_to "Discover Page", discover_path, method: :get %> </h3>
         <h2> Movie Results for: <%= @search %> </h2>
           <table>
             <% @movies.each do |movie| %>
           <tr> 
-              <td><%= link_to movie.title, user_movie_path(@user, movie.id) %></td>
+              <td><%= link_to movie.title, movie_path( movie.id) %></td>
               <td><%= number_with_precision(movie.vote_average, precision: 1) %> / 10</td>
           </tr>
       <% end %> 

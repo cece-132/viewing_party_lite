@@ -2,7 +2,7 @@
 
 <h3>Movie: <%= @movie.title %></h3>
 
-<%= form_with model: @viewing_party, url: user_movie_viewing_parties_path(@user, @movie.id), local: true do |f| %>
+<%= form_with model: @viewing_party, url: movie_viewing_parties_path(@user, @movie.id), local: true do |f| %>
   <%= f.label :duration, 'Duration (min)' %>
   <%= f.number_field :duration, options = { value: @movie.runtime, min: @movie.runtime } %>
 

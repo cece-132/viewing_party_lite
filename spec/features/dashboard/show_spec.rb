@@ -7,17 +7,23 @@ RSpec.describe 'User Show Page' do
   describe 'As a user when I visit the show page' do
     it 'Has my username' do
       @user = create(:user)
-      visit user_path(@user)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+      visit user_path
 
       expect(page).to have_content(@user.user_name)
     end
 
     it 'has a button to Discover Movies which leads to the discover page' do
       @user = create(:user)
-      visit user_path(@user)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+      visit user_path
 
       click_button('Discover Movies')
-      expect(current_path).to eq(user_discover_path(@user))
+      expect(current_path).to eq(discover_path)
     end
 
     describe 'viewing parties invited to list' do
@@ -26,6 +32,9 @@ RSpec.describe 'User Show Page' do
         @user = create(:user)
         @awesome_host = create(:user)
         @other_user = create(:user)
+
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
         # create 4 viewing parties each hosted by awesome_host
         @viewing_party_invites = create_list(:viewing_party, 4, host: @awesome_host.user_name, movie_id: 550)
         # creates 5 viewing_party_users, three rando invites, one for the user and one for the host for each viewing party
@@ -47,7 +56,8 @@ RSpec.describe 'User Show Page' do
         # creates viewing party where only the user is invited
         @lonely_viewing_party = create(:viewing_party, host: @user.user_name, movie_id: 550)
         create(:viewing_party_user, viewing_party: @lonely_viewing_party, user: @user)
-        visit user_path(@user)
+        
+        visit user_path
       end
       context 'when invited to a viewing party' do
         it 'shows that viewing party on page' do
@@ -74,7 +84,7 @@ RSpec.describe 'User Show Page' do
               within "#party_#{party.id}" do
                 expect(page).to have_link(party.movie_title)
                 click_link("#{party.movie_title}")
-                expect(current_path).to eq(user_movie_path(@user, party.movie_id))
+                expect(current_path).to eq movie_path(party.movie_id)
               end
             end
           end
@@ -190,7 +200,11 @@ RSpec.describe 'User Show Page' do
         # creates viewing party where only the user is invited
         @lonely_viewing_party = create(:viewing_party, host: @user.user_name)
         create(:viewing_party_user, viewing_party: @lonely_viewing_party, user: @user)
-        visit user_path(@user)
+       
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+      
+        visit user_path
       end
       context 'when hosting a viewing party' do
         it 'shows that viewing party on page' do

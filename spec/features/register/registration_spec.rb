@@ -21,7 +21,7 @@ RSpec.describe "User Registration" do |descr|
       click_button "Create User"
       new_user = User.last
 
-      expect(current_path).to eq user_path(new_user)
+      expect(current_path).to eq user_path
       expect(page).to have_content("Welcome, #{new_user.user_name}")
       expect(password).to_not eq new_user.password
     end

@@ -25,7 +25,7 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Mon, 24 Oct 2022 16:29:12 GMT
+      - Tue, 25 Oct 2022 21:55:57 GMT
       Server:
       - openresty
       Cache-Control:
@@ -34,19 +34,21 @@ http_interactions:
       - Accept-Encoding,Accept-Encoding
       - Origin
       X-Cache:
-      - Miss from cloudfront
+      - Hit from cloudfront
       Via:
-      - 1.1 045f1e1f031241f3808c557a2b5d6b0a.cloudfront.net (CloudFront)
+      - 1.1 2c861897aa9389c1f47299b6fea5b59c.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
       - DEN50-C2
       Alt-Svc:
       - h3=":443"; ma=86400
       X-Amz-Cf-Id:
-      - 7HFO8qg5Q1bFjHlVmo_JiiE24dBuuTQO8dpEIFrXk6qNC1Ql2A9QlQ==
+      - 8-7Zxk5sBbzJaJFVZlYH4_9Xw04kuKPmKoSFf9-NeiNt6hIvIKzSTw==
+      Age:
+      - '212'
     body:
       encoding: ASCII-8BIT
       string: '{"page":1,"results":[],"total_pages":0,"total_results":0}'
-  recorded_at: Mon, 24 Oct 2022 16:29:12 GMT
+  recorded_at: Tue, 25 Oct 2022 21:59:29 GMT
 - request:
     method: get
     uri: https://api.themoviedb.org/3/search/movie?api_key=<tmdb_api_key>&page=2&query=supercalir
@@ -72,7 +74,7 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Mon, 24 Oct 2022 16:29:12 GMT
+      - Tue, 25 Oct 2022 21:55:57 GMT
       Server:
       - openresty
       Cache-Control:
@@ -81,17 +83,19 @@ http_interactions:
       - Accept-Encoding,Accept-Encoding
       - Origin
       X-Cache:
-      - Miss from cloudfront
+      - Hit from cloudfront
       Via:
-      - 1.1 2ad801a60bd36fbeb6a62fab7eabe330.cloudfront.net (CloudFront)
+      - 1.1 e158a5cd644f102abc630a9f56b59d78.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
       - DEN50-C2
       Alt-Svc:
       - h3=":443"; ma=86400
       X-Amz-Cf-Id:
-      - UODVrLPlTnIp0LyJJrXwjkf4nQ7iy85TVBch1-7RhAMalc5o2r0hCQ==
+      - tDNHaQE45ANEvTNUmHeqdPFMnxlc9OZMeqT9MtbETpjqojpWRcJ4Kw==
+      Age:
+      - '212'
     body:
       encoding: ASCII-8BIT
       string: '{"page":2,"results":[],"total_pages":0,"total_results":0}'
-  recorded_at: Mon, 24 Oct 2022 16:29:12 GMT
+  recorded_at: Tue, 25 Oct 2022 21:59:29 GMT
 recorded_with: VCR 6.1.0

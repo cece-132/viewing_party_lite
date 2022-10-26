@@ -27,4 +27,9 @@ class MovieService
     response = conn.get("/3/search/movie?query=#{search_params}&page=#{page}")
     parse(response.body)
   end
+
+  # def self.find_movie(id)
+  #   response = conn.get("/movie/#{id}")
+  #   parse(response.body)
+  # end
 end 

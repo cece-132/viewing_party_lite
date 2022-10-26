@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  def show
-    @user = User.find(params[:id])
-  end
+  # def show
+  #   @user = User.find(params[:id])
+  # end
 
   def new
     @user = User.new
@@ -13,7 +13,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.password = params[:user][:password]
     if @user.save
-      redirect_to user_path(@user)
+      redirect_to user_path
+      session[:user_id] = @user.id
       flash[:success] = "Welcome, #{@user.user_name}!"
     else
       redirect_to register_path(@user)
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
     if user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "Welcome Back #{user.user_name}! Couldn't stay away for long we see"
-      redirect_to user_path(user)
+      redirect_to user_path
     else
       flash[:error] = "Uhmm...this is awkward...but you're wrong"
       render :login_form
