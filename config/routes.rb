@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   match '/login', to: 'users#login_form', via: :get
   match '/login', to: 'users#login_user', via: :post
   match '/user', to: 'dashboard#show', via: :get
+  match '/logout', to: 'dashboard#index', via: :get
   get '/discover', to: 'discover#search'
   
   resources :users, only: %i[create] do

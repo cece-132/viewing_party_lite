@@ -63,16 +63,58 @@ RSpec.describe "Landing Page" do
 
       it 'should show the user email' do
         @user = create(:user)
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
         visit root_path
 
         within("#existing-users") do
           expect(page).to have_link("#{@user.email}")
+          allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
           click_link "#{@user.email}"
         end
 
         expect(current_path).to eq user_path
+      end
+    end
+
+    describe 'registered users' do
+      it 'should not show the Login or create and Account Button/link' do
+        @user = create(:user)
+        visit root_path
+
+        expect(page).to have_button("Create New User")
+        expect(page).to have_button("Login")
+
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+        visit root_path
+
+        expect(page).to have_button("Logout")
+        expect(page).to_not have_button("Login")
+        expect(page).to_not have_button("Create New User")
+      end
+
+      it 'should be able to logout' do
+        @user = create(:user)
+        
+        visit '/login'
+
+        email = @user.email
+        password = @user.password
+  
+        fill_in :email, with: email
+        fill_in :password, with: password   
+        click_button "Log In"
+
+        visit root_path
+
+        click_button 'Logout'
+
+        expect(current_path).to eq "/logout"
+        expect(page).to have_content("You are now logged out")
+
+        click_on "Home"
+
+        expect(page).to have_button("Create New User")
+        expect(page).to have_button("Login")
       end
     end
   end

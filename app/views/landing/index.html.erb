@@ -5,8 +5,12 @@
 <br>
 <br>
 <br>
-<%= button_to "Create New User", '/register', method: :get %>
-<%= button_to "Login", '/login', method: :get %>
+<% if @user.present? %>
+  <%= button_to "Logout", '/logout', method: :get %>
+<% else %>
+  <%= button_to "Create New User", '/register', method: :get %>
+  <%= button_to "Login", '/login', method: :get %>
+<% end %>
 <br>
 <br>
 <br>

@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.password = params[:user][:password]
-    if @user.save
+    if @user.save && user.authenticate(params[:user][:password])
       redirect_to user_path
       session[:user_id] = @user.id
       flash[:success] = "Welcome, #{@user.user_name}!"
