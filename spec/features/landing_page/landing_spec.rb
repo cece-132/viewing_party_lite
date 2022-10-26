@@ -67,12 +67,10 @@ RSpec.describe "Landing Page" do
         visit root_path
 
         within("#existing-users") do
-          expect(page).to have_link("#{@user.email}")
+          expect(page).to have_content("#{@user.email}")
           allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
-          click_link "#{@user.email}"
+          # click_link "#{@user.email}"
         end
-
-        expect(current_path).to eq user_path
       end
     end
 
@@ -115,6 +113,19 @@ RSpec.describe "Landing Page" do
 
         expect(page).to have_button("Create New User")
         expect(page).to have_button("Login")
+      end
+    end
+
+    describe 'authorization' do
+      describe 'as a visitor' do
+        describe 'when I try to vist /user' do
+          it 'I see a message that tells me to log in' do
+            visit '/user'
+
+            expect(page).to have_content("Please login")
+            expect(current_path).to eq "/"
+          end
+        end
       end
     end
   end
