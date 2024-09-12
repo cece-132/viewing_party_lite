@@ -22,16 +22,23 @@ RSpec.describe 'The register new user page' do
     it 'when I click the register button I am redirected to the dashboard page' do
       fill_in 'Name:', with: 'Kat'
       fill_in 'Email:', with: 'kit.kat@guhmail.com'
+      fill_in 'Password:', with: 'testingtesters'
+      fill_in 'Password Confirmation:', with: 'testingtesters'
+
       click_button 'Create User'
 
-      expect(current_path).to eq(user_path(User.find_by(user_name: 'Kat')))
+      User.find_by(user_name: 'Kat')
+
+      expect(current_path).to eq(user_path)
     end
 
     it 'when I click the register button I am redirected register page if that email has been taken' do
-      @kat = User.create!(user_name: 'Kat', email: 'kit.kat@guhmail.com')
+      @kat = User.create!(user_name: 'Kat', email: 'kit.kat@guhmail.com', password_digest: 'testingtesters')
 
       fill_in 'Name:', with: 'Kit'
       fill_in 'Email:', with: 'kit.kat@guhmail.com'
+      fill_in 'Password:', with: 'testingtesters'
+
       click_button 'Create User'
 
       expect(current_path).to eq(register_path)

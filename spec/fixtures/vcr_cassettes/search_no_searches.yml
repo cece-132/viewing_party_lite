@@ -25,36 +25,30 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Fri, 14 Oct 2022 17:32:20 GMT
+      - Tue, 25 Oct 2022 21:55:57 GMT
       Server:
       - openresty
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Methods:
-      - GET, HEAD, POST, PUT, DELETE, OPTIONS
-      Access-Control-Expose-Headers:
-      - ETag, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, Retry-After,
-        Content-Length, Content-Range
       Cache-Control:
       - public, max-age=600
       Vary:
-      - Accept-Encoding
+      - Accept-Encoding,Accept-Encoding
+      - Origin
       X-Cache:
       - Hit from cloudfront
       Via:
-      - 1.1 44e92eddc431cc09e1e2c5b24edc90f8.cloudfront.net (CloudFront)
+      - 1.1 2c861897aa9389c1f47299b6fea5b59c.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
-      - DEN52-P2
+      - DEN50-C2
       Alt-Svc:
       - h3=":443"; ma=86400
       X-Amz-Cf-Id:
-      - TAmEdYVpQDFuFByM8CgP_rF4QXKtYut1dOffD2cYBXGz6m-pMO3Rsg==
+      - 8-7Zxk5sBbzJaJFVZlYH4_9Xw04kuKPmKoSFf9-NeiNt6hIvIKzSTw==
       Age:
-      - '45'
+      - '212'
     body:
       encoding: ASCII-8BIT
       string: '{"page":1,"results":[],"total_pages":0,"total_results":0}'
-  recorded_at: Fri, 14 Oct 2022 17:33:05 GMT
+  recorded_at: Tue, 25 Oct 2022 21:59:29 GMT
 - request:
     method: get
     uri: https://api.themoviedb.org/3/search/movie?api_key=<tmdb_api_key>&page=2&query=supercalir
@@ -80,32 +74,28 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Fri, 14 Oct 2022 17:33:05 GMT
+      - Tue, 25 Oct 2022 21:55:57 GMT
       Server:
       - openresty
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Methods:
-      - GET, HEAD, POST, PUT, DELETE, OPTIONS
-      Access-Control-Expose-Headers:
-      - ETag, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, Retry-After,
-        Content-Length, Content-Range
       Cache-Control:
       - public, max-age=600
       Vary:
-      - Accept-Encoding
+      - Accept-Encoding,Accept-Encoding
+      - Origin
       X-Cache:
-      - Miss from cloudfront
+      - Hit from cloudfront
       Via:
-      - 1.1 cddde15c11afac53ac9fe7978dcfecd6.cloudfront.net (CloudFront)
+      - 1.1 e158a5cd644f102abc630a9f56b59d78.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
       - DEN50-C2
       Alt-Svc:
       - h3=":443"; ma=86400
       X-Amz-Cf-Id:
-      - YlwzBCMMuVYo99r4zro558oru_55zhfo9iMXniwJSIHrzEwmGILzNQ==
+      - tDNHaQE45ANEvTNUmHeqdPFMnxlc9OZMeqT9MtbETpjqojpWRcJ4Kw==
+      Age:
+      - '212'
     body:
       encoding: ASCII-8BIT
       string: '{"page":2,"results":[],"total_pages":0,"total_results":0}'
-  recorded_at: Fri, 14 Oct 2022 17:33:05 GMT
+  recorded_at: Tue, 25 Oct 2022 21:59:29 GMT
 recorded_with: VCR 6.1.0

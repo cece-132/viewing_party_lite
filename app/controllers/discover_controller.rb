@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class DiscoverController < ApplicationController
+  before_action :require_user
+
   def search
-    @user = User.find(params[:user_id])
+    # @user = current_user
     @top_movies = []
     @movies = []
     @search = ""

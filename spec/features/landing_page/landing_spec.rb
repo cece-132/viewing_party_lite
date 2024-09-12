@@ -62,16 +62,78 @@ RSpec.describe "Landing Page" do
       end
 
       it 'should show the user email' do
-        user = create(:user)
+        @user = create(:user)
 
         visit root_path
 
         within("#existing-users") do
-          expect(page).to have_link("#{user.email}")
-          click_link "#{user.email}"
+          expect(page).to have_content("#{@user.email}")
+          allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+          # click_link "#{@user.email}"
         end
+      end
+    end
 
-        expect(current_path).to eq user_path(user)
+    describe 'registered users' do
+      it 'should not show the Login or create and Account Button/link' do
+        @user = create(:user)
+        visit root_path
+
+        expect(page).to have_button("Create New User")
+        expect(page).to have_button("Login")
+
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+        visit root_path
+
+        expect(page).to have_button("Logout")
+        expect(page).to_not have_button("Login")
+        expect(page).to_not have_button("Create New User")
+      end
+
+      it 'should be able to logout' do
+        @user = create(:user)
+        
+        visit '/login'
+
+        email = @user.email
+        password = @user.password
+  
+        fill_in :email, with: email
+        fill_in :password, with: password   
+        click_button "Log In"
+
+        visit root_path
+
+        click_button 'Logout'
+
+        expect(current_path).to eq "/logout"
+        expect(page).to have_content("You are now logged out")
+
+        click_on "Home"
+
+        expect(page).to have_button("Create New User")
+        expect(page).to have_button("Login")
+      end
+    end
+
+    describe 'authorization' do
+      describe 'as a visitor' do
+        describe 'when I try to vist /user' do
+          it 'I see a message that tells me to log in' do
+            visit '/user'
+
+            expect(page).to have_content("Please login")
+            expect(current_path).to eq "/"
+          end
+        end
+        describe 'when I try to visit /movies/550' do
+          it 'I see a message that tells me to log in' do
+            visit '/movies/550'
+
+            expect(page).to have_content("Please login")
+            expect(current_path).to eq "/"
+          end
+        end
       end
     end
   end

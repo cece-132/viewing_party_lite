@@ -5,7 +5,12 @@
 <br>
 <br>
 <br>
-<%= button_to "Create New User", '/register', method: :get %>
+<% if @user.present? %>
+  <%= button_to "Logout", '/logout', method: :get %>
+<% else %>
+  <%= button_to "Create New User", '/register', method: :get %>
+  <%= button_to "Login", '/login', method: :get %>
+<% end %>
 <br>
 <br>
 <br>
@@ -15,7 +20,7 @@
   <h1> Existing Users </h1>
   
   <% @users.each do |user| %>
-    <%= link_to user.email, user_path(user) %> <br>
+    <%= user.email %> <br>
   <% end %>
 
 </div>
